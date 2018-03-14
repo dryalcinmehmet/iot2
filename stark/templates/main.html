@@ -1,0 +1,811 @@
+
+
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome Home {% endblock %}</title>
+</head>
+
+
+
+{% block g1 %}
+<div id="g1" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+<script>
+Highcharts.chart('g1', {
+
+    title: {
+        text: 'Aktif Cihazlar'
+    },
+
+    subtitle: {
+        text: ''
+    },
+
+    yAxis: {
+        title: {
+            text: ''
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+            pointStart: 2015
+        }
+    },
+
+    series: [{
+        name: 'IoT 1',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    },{
+        name: 'IoT 2',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    },{
+        name: 'IoT 3',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    }, {
+        name: 'IoT 4',
+        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+    }, {
+        name: 'IoT 5',
+        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+    }, {
+        name: 'IoT 6',
+        data: [17722, 17722, 7988, 12169, 15112, 22452, 34400, 34227]
+    },],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+
+
+
+</script>
+
+{% endblock %}
+
+
+{%block g2%}
+<div id="g2" style="min-width: 310px; height: 250px; "></div>
+<script>
+ Highcharts.chart('g2', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
+    },
+    title: {
+        text: 'IoT Cihaz Veri Yoğunluğu'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            depth: 35,
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'IoT',
+        data: [
+            ['IoT 1', 45.0],
+            ['IoT 2', 26.8],
+            {
+                name: 'IoT 3',
+                y: 12.8,
+                sliced: true,
+                selected: true
+            },
+            ['IoT 4', 8.5],
+            ['IoT 5', 6.2],
+            ['IoT 6', 0.7]
+        ]
+    }]
+});
+</script>
+{% endblock %}
+
+{%block g3%}
+<div id="g3" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+<script>
+
+  Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+
+Highcharts.chart('g3', {
+    chart: {
+        type: 'spline',
+        animation: Highcharts.svg, // don't animate in old IE
+        marginRight: 10,
+        events: {
+            load: function () {
+
+                // set up the updating of the chart each second
+                var series = this.series[0];
+                setInterval(function () {
+                    var x = (new Date()).getTime(), // current time
+                        y = Math.random();
+                    series.addPoint([x, y], true, true);
+                }, 1000);
+            }
+        }
+    },
+    title: {
+        text: 'Canlı Veri'
+    },
+    xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+    },
+    yAxis: {
+        title: {
+            text: 'Voltaj'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+        }]
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                Highcharts.numberFormat(this.y, 2);
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    series: [{
+        name: 'Voltaj',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+
+            for (i = -19; i <= 0; i += 1) {
+                data.push({
+                    x: time + i * 1000,
+                    y: Math.random()
+                });
+            }
+            return data;
+        }())
+    }],
+
+
+
+});
+</script>
+{%endblock%}
+
+
+
+{% block g4 %}
+<div id="g4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+  Highcharts.chart('g4', {
+    title: {
+        text: 'Aktif IoT Cihazları'
+    },
+    xAxis: {
+        categories: ['Voltaj', 'Akım', 'Aktif Güç', 'Reaktif Güç', 'Enerji']
+    },
+    labels: {
+        items: [{
+            html: 'Toplam Veri Yoğunluğu',
+            style: {
+                left: '50px',
+                top: '18px',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+            }
+        }]
+    },
+
+    series: [{
+        type: 'column',
+        name: 'IoT 1',
+        data: [3, 2, 1, 3, 4],
+        color: Highcharts.getOptions().colors[0], // Jane's color
+    },{
+        type: 'column',
+        name: 'IoT 2',
+        data: [3, 2, 1, 3, 4],
+        color: Highcharts.getOptions().colors[1], // Jane's color
+    },{
+        type: 'column',
+        name: 'IoT 3',
+        data: [3, 2, 1, 3, 4],
+        color: Highcharts.getOptions().colors[2] ,// Jane's color
+    },{
+        type: 'column',
+        name: 'IoT 4',
+        data: [3, 2, 1, 3, 4],
+        color: Highcharts.getOptions().colors[3], // Jane's color
+    }, {
+        type: 'column',
+        name: 'IoT 5',
+        data: [2, 3, 5, 7, 6],
+        color: Highcharts.getOptions().colors[4], // Jane's color
+    }, {
+        type: 'column',
+        name: 'IoT 6',
+        data: [4, 3, 3, 9, 0],
+        color: Highcharts.getOptions().colors[5], // Jane's color
+    }, {
+        type: 'spline',
+        name: 'IoT 6',
+        data: [3, 2.67, 3, 6.33, 3.33],
+        marker: {
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[6],
+            fillColor: 'white'
+        }
+    }, {
+        type: 'pie',
+        name: 'Veri Yoğunluğu',
+
+        data: [{
+            name: 'IoT 1',
+            y: 13,
+            color: Highcharts.getOptions().colors[1] // Jane's color
+        }, {
+            name: 'IoT 2',
+            y: 13,
+            color: Highcharts.getOptions().colors[2] // Jane's color
+        }, {
+            name: 'IoT 3',
+            y: 13,
+            color: Highcharts.getOptions().colors[3] // Jane's color
+        }, {
+            name: 'IoT 4',
+            y: 13,
+            color: Highcharts.getOptions().colors[4] // Jane's color
+        }, {
+            name: 'IoT 5',
+            y: 23,
+            color: Highcharts.getOptions().colors[5] // John's color
+        }, {
+            name: 'IoT 6',
+            y: 19,
+            color: Highcharts.getOptions().colors[6] // Joe's color
+        }],
+        center: [100, 80],
+        size: 100,
+        showInLegend: false,
+        dataLabels: {
+            enabled: false
+        }
+    }]
+});
+
+
+</script>
+{% endblock %}
+
+
+
+{% block g9 %}
+<div id="g9" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+Highcharts.chart('g9', {
+    chart: {
+        type: 'area',
+
+    },
+    title: {
+        text: 'Güç Ekranı'
+    },
+    subtitle: {
+        text: ' <a href="">' +
+            '</a>'
+    },
+    xAxis: {
+        allowDecimals: true,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'CPU Yoğunlukları'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000 + 'k';
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+    },
+    plotOptions: {
+        area: {
+            pointStart: 2010,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'IoT Cihaz 1',
+        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+            1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+    }, {
+        name: 'IoT Cihaz 2',
+        data: [null, null, null, null, null, null, null, null, null, null,
+            5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+            4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+            15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+            33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+            35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+            21000, 20000, 19000, 18000, 18000, 17000, 16000]
+    },{
+        name: 'IoT Cihaz 3',
+        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+            1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+    },{
+        name: 'IoT Cihaz 4',
+        data: [null, null, null, null, null, 10421, 10358, 10295, 10104,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+    },{
+        name: 'IoT Cihaz 1',
+        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+            9005, 8436, 7063, 6057, 4618, 6444, 9822, 55468, 20434, 24126,
+            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+    },{
+        name: 'IoT Cihaz 5',
+        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+            9005, 8436, 7063, 6057, 4618, 6444, 9822, 55468, 20434, 24126,
+            27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+            26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+            24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+            22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+            10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+    },]
+});
+</script>
+{% endblock %}
+
+
+
+{% block g5 %}
+<div style="width: 600px; height: 200px; margin: 0 auto">
+    <div id="g5" style="width: 300px; height: 200px; float: left"></div>
+
+</div>
+
+<script>
+
+
+var gaugeOptions = {
+
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('g5', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: 200,
+        title: {
+            text: 'Sıcaklık'
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [80],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">C</span></div>'
+        },
+        tooltip: {
+            valueSuffix: 'C'
+        }
+    }]
+
+}));
+
+// The RPM gauge
+var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: 5,
+        title: {
+            text: 'RPM'
+        }
+    },
+
+    series: [{
+        name: 'RPM',
+        data: [1],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+        },
+        tooltip: {
+            valueSuffix: ' revolutions/min'
+        }
+    }]
+
+}));
+
+// Bring life to the dials
+setInterval(function () {
+    // Speed
+    var point,
+        newVal,
+        inc;
+
+    if (chartSpeed) {
+        point = chartSpeed.series[0].points[0];
+        inc = Math.round((Math.random() - 0.5) * 100);
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 200) {
+            newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+    }
+
+    // RPM
+    if (chartRpm) {
+        point = chartRpm.series[0].points[0];
+        inc = Math.random() - 0.5;
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 5) {
+            newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+    }
+}, 2000);
+
+
+
+</script>
+
+
+{% endblock %}
+
+{% block g6 %}
+<div id="g6" style="min-width: 310px; max-width: 400px; height: 200px; margin: 0 auto"></div>
+<script>
+
+Highcharts.chart('g6', {
+
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+    },
+
+    title: {
+        text: 'Frekans'
+    },
+
+    pane: {
+        startAngle: -150,
+        endAngle: 150,
+        background: [{
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#FFF'],
+                    [1, '#333']
+                ]
+            },
+            borderWidth: 0,
+            outerRadius: '109%'
+        }, {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#333'],
+                    [1, '#FFF']
+                ]
+            },
+            borderWidth: 1,
+            outerRadius: '107%'
+        }, {
+            // default background
+        }, {
+            backgroundColor: '#DDD',
+            borderWidth: 0,
+            outerRadius: '105%',
+            innerRadius: '103%'
+        }]
+    },
+
+    // the value axis
+    yAxis: {
+        min: 0,
+        max: 200,
+
+        minorTickInterval: 'auto',
+        minorTickWidth: 1,
+        minorTickLength: 10,
+        minorTickPosition: 'inside',
+        minorTickColor: '#666',
+
+        tickPixelInterval: 30,
+        tickWidth: 2,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+        labels: {
+            step: 2,
+            rotation: 'auto'
+        },
+        title: {
+            text: 'Hz'
+        },
+        plotBands: [{
+            from: 0,
+            to: 120,
+            color: '#55BF3B' // green
+        }, {
+            from: 120,
+            to: 160,
+            color: '#DDDF0D' // yellow
+        }, {
+            from: 160,
+            to: 200,
+            color: '#DF5353' // red
+        }]
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [50],
+        tooltip: {
+            valueSuffix: ' Frekans'
+        }
+    }]
+
+},
+// Add some life
+function (chart) {
+    if (!chart.renderer.forExport) {
+        setInterval(function () {
+            var point = chart.series[0].points[0],
+                newVal,
+                inc = Math.round((Math.random() - 0.5) * 20);
+
+            newVal = point.y + inc;
+            if (newVal < 0 || newVal > 200) {
+                newVal = point.y - inc;
+            }
+
+            point.update(newVal);
+
+        }, 3000);
+    }
+});
+</script>
+{% endblock %}
+
+
+{% block g7 %}
+<div id="g7" style="min-width: 310px; max-width: 800px; height: 200px; margin: 0 auto"></div>
+<script>
+
+
+
+// Age categories
+var categories = [
+    '0-4', '5-9', '10-14', '15-19',
+    '20-24', '25-29', '30-34', '35-39', '40-44',
+
+];
+
+Highcharts.chart('g7', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Kapasitif/Endüktif'
+    },
+    subtitle: {
+        text: 'Source: <a href=""></a>'
+    },
+    xAxis: [{
+        categories: categories,
+        reversed: false,
+        labels: {
+            step: 1
+        }
+    }, { // mirror axis on right side
+        opposite: true,
+        reversed: false,
+        categories: categories,
+        linkedTo: 0,
+        labels: {
+            step: 1
+        }
+    }],
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            formatter: function () {
+                return Math.abs(this.value) + '%';
+            }
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + ', Endüktif ' + this.point.category + '</b><br/>' +
+                'Enerji: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+        }
+    },
+
+    series: [{
+        name: 'Kapasitif',
+        data: [-2.2, -2.2, -2.3, -2.5, -2.7, -3.1,-3.2
+
+            ]
+    }, {
+        name: 'Endüktif',
+        data: [2.1, 2.0, 2.2, 2.4, 2.6, 3.0, 3.1,
+
+            ]
+    }]
+});
+
+</script>
+{% endblock %}
+
+
+
+
+
+{% block g8 %}
+
+<h5><font color="purple"> Enerdora A.Ş Enerji Yönetim Sistemi Version 1.1</font></h5>
+{% endblock %}
+
+
+
+
+
+</body>
+</html>

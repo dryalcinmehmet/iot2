@@ -1,0 +1,120 @@
+<!-- djangotemplates/example/templates/mainpage.html -->
+
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome Home {% endblock %}</title>
+
+
+
+</head>
+
+
+
+
+{% block graph1 %}
+<div id="grafik"></div>
+<script>
+ Highcharts.chart('grafik', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Energy'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Billions'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: 'Asia',
+        data: {{cd.values1}}
+    }, {
+        name: 'Africa',
+        data: {{cd.values2}}
+    }, {
+        name: 'Europe',
+        data: {{cd.values3}}
+    }, {
+        name: 'America',
+        data: {{cd.values4}}
+    }, {
+        name: 'Oceania',
+        data: {{cd.values5}}
+    }]
+});
+
+ </script>
+
+ {% endblock %}
+
+
+
+{% block graph2 %}
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script>
+window.onload = function () {
+
+var options = {
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "jQuery Spline Area Chart"
+	},
+	data: [
+	{
+		type: "splineArea",
+		dataPoints: {{ch}}
+	}
+	]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+</script>
+
+
+ {% endblock %}
+
+
+
+
+
+
+</body>
+</html>

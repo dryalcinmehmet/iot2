@@ -1,0 +1,71 @@
+.login&menu-header {
+    background-color: lightblue;
+    position: absolute;
+    top:  40px;
+    left: 30px;
+
+
+}
+
+#user-login {
+    font-size: 10px;
+    position: absolute;
+    top:  20px;
+    left: 850px;
+
+}
+
+#header-menu {
+
+    position: absolute;
+    top:  20px;
+    left: 30px;
+
+
+}
+
+.main_page {
+    width: 960px;
+    margin: 0px 0px 45px 40px;
+    auto;
+
+}
+
+
+
+
+.highcharts-yaxis-grid .highcharts-grid-line {
+	display: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container-data {
+    background: #eac656;
+    margin: 10 10 10 10;
+    border: 0px solid black;
+    position: absolute;
+    top:  120px;
+    left: 100px;
+}
+
+
+
+
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: #262728;
+  font-family: 'Lato', sans-serif;
+}

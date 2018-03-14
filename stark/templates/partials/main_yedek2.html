@@ -1,0 +1,527 @@
+
+
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome Home {% endblock %}</title>
+</head>
+
+<body>
+
+{% block g1 %}
+<div id="g1" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+<script>
+    Highcharts.chart('g1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Enerji Tüketimi'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'kwH'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    colors: [ '#910000', '#1aadce',
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
+    series: [{
+        name: 'IoT 1',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    }, {
+        name: 'IoT 2',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+    }, {
+        name: 'IoT 3',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+    }, ]
+});
+</script>
+
+{% endblock %}
+
+
+{%block g2%}
+<div id="g2" style="min-width: 310px; height: 250px; max-width: 800px; margin: 0 auto"></div>
+<script>
+    Highcharts.chart('g2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Enerji Tüketimi'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    colors: [ '#910000', '#1aadce',
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'IoT 1',
+            y: 24.03,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'IoT 2',
+            y: 10.38
+        }, {
+            name: 'IoT 3',
+            y: 4.77
+        },]
+    }]
+});
+</script>
+{% endblock %}
+
+{%block g3%}
+<div id="chartContainer" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+<script>
+window.onload = function () {
+
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartContainer", {
+	title :{
+		text: "Dynamic Data"
+	},
+	axisY: {
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}]
+});
+
+var xVal = 0;
+var yVal = 100;
+var updateInterval = 1000;
+var dataLength = 20; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+	count = count || 1;
+
+	for (var j = 0; j < count; j++) {
+		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+		dps.push({
+			x: xVal,
+			y: yVal
+		});
+		xVal++;
+	}
+
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
+
+	chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+
+}
+</script>
+{%endblock%}
+
+
+{% block g4 %}
+<div id="g4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+
+    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+
+var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+    Highcharts.chart('g4', {
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: 'Enerji Tüketimi'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                    'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+
+        series: [{
+            type: 'area',
+            name: 'USD to EUR',
+            data: data
+        }]
+    });
+});
+
+Highcharts.theme = {
+           colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+              "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+           chart: {
+              backgroundColor: {
+                 linearGradient: [0, 0, 0, 400],
+                 stops: [
+                    [0, 'rgb(96, 96, 96)'],
+                    [1, 'rgb(16, 16, 16)']
+                 ]
+              },
+              borderWidth: 0,
+              borderRadius: 15,
+              plotBackgroundColor: null,
+              plotShadow: false,
+              plotBorderWidth: 0
+           },
+           title: {
+              style: {
+                 color: '#FFF',
+                 font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+              }
+           },
+           subtitle: {
+              style: {
+                 color: '#DDD',
+                 font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+              }
+           },
+           xAxis: {
+              gridLineWidth: 0,
+              lineColor: '#999',
+              tickColor: '#999',
+              labels: {
+                 style: {
+                    color: '#999',
+                    fontWeight: 'bold'
+                 }
+              },
+              title: {
+                 style: {
+                    color: '#AAA',
+                    font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                 }
+              }
+           },
+           yAxis: {
+              alternateGridColor: null,
+              minorTickInterval: null,
+              gridLineColor: 'rgba(255, 255, 255, .1)',
+              lineWidth: 0,
+              tickWidth: 0,
+              labels: {
+                 style: {
+                    color: '#999',
+                    fontWeight: 'bold'
+                 }
+              },
+              title: {
+                 style: {
+                    color: '#AAA',
+                    font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                 }
+              }
+           },
+           legend: {
+              itemStyle: {
+                 color: '#CCC'
+              },
+              itemHoverStyle: {
+                 color: '#FFF'
+              },
+              itemHiddenStyle: {
+                 color: '#333'
+              }
+           },
+           labels: {
+              style: {
+                 color: '#CCC'
+              }
+           },
+           tooltip: {
+              backgroundColor: {
+                 linearGradient: [0, 0, 0, 50],
+                 stops: [
+                    [0, 'rgba(96, 96, 96, .8)'],
+                    [1, 'rgba(16, 16, 16, .8)']
+                 ]
+              },
+              borderWidth: 0,
+              style: {
+                 color: '#FFF'
+              }
+           },
+
+
+           plotOptions: {
+              line: {
+                 dataLabels: {
+                    color: '#CCC'
+                 },
+                 marker: {
+                    lineColor: '#333'
+                 }
+              },
+              spline: {
+                 marker: {
+                    lineColor: '#333'
+                 }
+              },
+              scatter: {
+                 marker: {
+                    lineColor: '#333'
+                 }
+              },
+              candlestick: {
+                 lineColor: 'white'
+              }
+           },
+
+           toolbar: {
+              itemStyle: {
+                 color: '#CCC'
+              }
+           },
+
+           navigation: {
+              buttonOptions: {
+                 backgroundColor: {
+                    linearGradient: [0, 0, 0, 20],
+                    stops: [
+                       [0.4, '#606060'],
+                       [0.6, '#333333']
+                    ]
+                 },
+                 borderColor: '#000000',
+                 symbolStroke: '#C0C0C0',
+                 hoverSymbolStroke: '#FFFFFF'
+              }
+           },
+
+           exporting: {
+              buttons: {
+                 exportButton: {
+                    symbolFill: '#55BE3B'
+                 },
+                 printButton: {
+                    symbolFill: '#7797BE'
+                 }
+              }
+           },
+
+           // scroll charts
+           rangeSelector: {
+              buttonTheme: {
+                 fill: {
+                    linearGradient: [0, 0, 0, 20],
+                    stops: [
+                       [0.4, '#888'],
+                       [0.6, '#555']
+                    ]
+                 },
+                 stroke: '#000000',
+                 style: {
+                    color: '#CCC',
+                    fontWeight: 'bold'
+                 },
+                 states: {
+                    hover: {
+                       fill: {
+                          linearGradient: [0, 0, 0, 20],
+                          stops: [
+                             [0.4, '#BBB'],
+                             [0.6, '#888']
+                          ]
+                       },
+                       stroke: '#000000',
+                       style: {
+                          color: 'white'
+                       }
+                    },
+                    select: {
+                       fill: {
+                          linearGradient: [0, 0, 0, 20],
+                          stops: [
+                             [0.1, '#000'],
+                             [0.3, '#333']
+                          ]
+                       },
+                       stroke: '#000000',
+                       style: {
+                          color: 'yellow'
+                       }
+                    }
+                 }
+              },
+              inputStyle: {
+                 backgroundColor: '#333',
+                 color: 'silver'
+              },
+              labelStyle: {
+                 color: 'silver'
+              }
+           },
+
+           navigator: {
+              handles: {
+                 backgroundColor: '#666',
+                 borderColor: '#AAA'
+              },
+              outlineColor: '#CCC',
+              maskFill: 'rgba(16, 16, 16, 0.5)',
+              series: {
+                 color: '#7798BF',
+                 lineColor: '#A6C7ED'
+              }
+           },
+
+           scrollbar: {
+              barBackgroundColor: {
+                    linearGradient: [0, 0, 0, 20],
+                    stops: [
+                       [0.4, '#888'],
+                       [0.6, '#555']
+                    ]
+                 },
+              barBorderColor: '#CCC',
+              buttonArrowColor: '#CCC',
+              buttonBackgroundColor: {
+                    linearGradient: [0, 0, 0, 20],
+                    stops: [
+                       [0.4, '#888'],
+                       [0.6, '#555']
+                    ]
+                 },
+              buttonBorderColor: '#CCC',
+              rifleColor: '#FFF',
+              trackBackgroundColor: {
+                 linearGradient: [0, 0, 0, 10],
+                 stops: [
+                    [0, '#000'],
+                    [1, '#333']
+                 ]
+              },
+              trackBorderColor: '#666'
+           },
+
+           // special colors for some of the demo examples
+           legendBackgroundColor: 'rgba(48, 48, 48, 0.8)',
+           legendBackgroundColorSolid: 'rgb(70, 70, 70)',
+           dataLabelsColor: '#444',
+           textColor: '#E0E0E0',
+           maskColor: 'rgba(255,255,255,0.3)'
+        };
+
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+{% block g5 %}
+
+
+
+{% endblock %}
+
+{% block g6 %}{% endblock %}
+{% block g7 %}{% endblock %}
+
+</body>
+</html>

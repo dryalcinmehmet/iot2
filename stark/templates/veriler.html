@@ -1,0 +1,788 @@
+
+
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}About Us {% endblock %}</title>
+
+
+
+
+</head>
+<body>
+
+
+
+
+{% block veri-chart %}
+
+<div id="veri-chart" style="width:900px; height:200px; margin: 80px 0px 0px 0px;"></div>
+<button id="plain">Dikey</button>
+<button id="inverted">Yatay</button>
+<button id="polar">Polar</button>
+
+<script>
+var chart = Highcharts.chart('veri-chart', {
+
+    title: {
+        text: 'Yıllık Ölçülen Toplam Enerji'
+    },
+
+    subtitle: {
+        text: 'kwH'
+    },
+
+    xAxis: {
+        categories: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+    },
+
+    series: [{
+        type: 'column',
+        colorByPoint: true,
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+        showInLegend: false
+    }]
+
+});
+
+
+$('#plain').click(function () {
+    chart.update({
+        chart: {
+            inverted: false,
+            polar: false
+        },
+        subtitle: {
+            text: 'Dikey'
+        }
+    });
+});
+
+$('#inverted').click(function () {
+    chart.update({
+        chart: {
+            inverted: true,
+            polar: false
+        },
+        subtitle: {
+            text: 'Inverted'
+        }
+    });
+});
+
+$('#polar').click(function () {
+    chart.update({
+        chart: {
+            inverted: false,
+            polar: true
+        },
+        subtitle: {
+            text: 'Polar'
+        }
+    });
+});
+
+</script>
+{% endblock %}
+
+
+
+
+ {% block veriler %}
+ <div class="tab"  style=" margin: 10px 0px 0px 0px;">
+  <button class="tablinks" onclick="openCity(event, 'IoT 1')">IoT 1</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 2')">IoT 2</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 3')">IoT 3</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 4')">IoT 4</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 5')">IoT 5</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 6')">IoT 6</button>
+
+</div>
+
+<!-- Tab content -->
+<div id="IoT 1" class="tabcontent">
+<font color="yellow">
+ <table id="example" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 1</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+
+</div>
+
+ <div id="IoT 2" class="tabcontent">
+<font color="purple">
+ <table id="example1" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 2</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+
+</div>
+
+ <div id="IoT 3" class="tabcontent">
+<font color="cyan">
+ <table id="example2" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 3</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+
+</div>
+
+ <div id="IoT 4" class="tabcontent">
+<font color="white">
+ <table id="example3" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 4</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+
+</div>
+
+
+<div id="IoT 5" class="tabcontent">
+
+<font color="pink">
+ <table id="example4" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 5</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+</div>
+
+<div id="IoT 6" class="tabcontent">
+
+<font color="red">
+ <table id="example5" class="display" cellspacing="0" width="100%" style="margin: 0px 0px 0px 50px; ">
+        <thead>
+            <tr>
+                <th>Cihaz Adı</th>
+                <th>Voltaj</th>
+                <th>Akım</th>
+                <th>Aktif Güç</th>
+                <th>Reaktif Güç</th>
+                <th>Frekans</th>
+                <th>Sıcaklık</th>
+                <th>Sinyal Durumu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for i in '10000000000000' %}
+            <tr>
+                <td>IoT Cihaz 6</td>
+                <td>220</td>
+                <td>15</td>
+                <td>3300</td>
+                <td>2640</td>
+                <td>60</td>
+                <td>50</td>
+                <td>Yüksek</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+
+</font>
+
+
+
+ <script>
+
+
+
+     $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+ </script>
+
+</div>
+
+
+ <script>
+     function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+ </script>
+<style>
+    /* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #262728;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: #25ddd1;
+    float: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+
+
+}
+}
+
+</style>
+ <!-- Tab links -->
+
+  {% endblock %}
+
+
+{% block gerilim-izleyici %}
+<div id="gerilim-izleyici" style="height: 250px;  width: 440px; margin: 20px 0px 0px 30px;"></div>
+<script>
+
+
+
+function getData(n,m) {
+    var arr = [],
+
+        i,
+        a,
+        b,
+        c,
+        spike;
+    for (i = 0; i < n; i = i + 1) {
+        if (i % 100 === 0) {
+            a = 2 * Math.random();
+        }
+        if (i % 1000 === 0) {
+            b = 2 * Math.random();
+        }
+        if (i % 10000 === 0) {
+            c = 2 * Math.random();
+        }
+        if (i % 50000 === 0) {
+            spike = 10;
+        } else {
+            spike = 0;
+        }
+        arr.push([
+            i,
+            2 * Math.sin(i / 100) + a + b + c + spike + Math.random()
+        ]);
+    }
+
+    return arr;
+}
+var n = 500000,
+    data = getData(n);
+
+
+console.time('line');
+Highcharts.chart('gerilim-izleyici', {
+
+    chart: {
+        zoomType: 'x'
+    },
+
+    boost: {
+        useGPUTranslations: true
+    },
+
+    title: {
+        text: 'Gerilim İzleyici'
+    },
+
+    subtitle: {
+        text: 'Saniyede 1000 Örnek'
+    },
+
+    tooltip: {
+        valueDecimals: 2
+    },
+ colors: [
+      '#8725ce'],
+    series: [{
+        data: data,
+        lineWidth: 0.5
+    }]
+
+
+});
+console.timeEnd('line');
+
+</script>
+{% endblock %}
+
+
+{% block akim-izleyici %}
+<div id="akim-izleyici" style="height: 250px;  width: 440px; margin: 20px 0px 0px 90px;"></div>
+<script>
+
+
+
+function getData(n,m) {
+    var arr = [],
+
+        i,
+        a,
+        b,
+        c,
+        spike;
+    for (i = 0; i < n; i = i + 1) {
+        if (i % 100 === 0) {
+            a = 2 * Math.random();
+        }
+        if (i % 1000 === 0) {
+            b = 2 * Math.random();
+        }
+        if (i % 10000 === 0) {
+            c = 2 * Math.random();
+        }
+        if (i % 50000 === 0) {
+            spike = 10;
+        } else {
+            spike = 0;
+        }
+        arr.push([
+            i,
+            2 * Math.sin(i / 100) + a + b + c + spike + Math.random()
+        ]);
+    }
+
+    return arr;
+}
+var n = 500000,
+    data = getData(n);
+
+
+console.time('line');
+Highcharts.chart('akim-izleyici', {
+
+    chart: {
+        zoomType: 'x'
+    },
+
+    boost: {
+        useGPUTranslations: true
+    },
+
+    title: {
+        text: 'Akım İzleyici'
+    },
+
+    subtitle: {
+        text: 'Saniyede 1000 Örnek'
+    },
+
+    tooltip: {
+        valueDecimals: 2
+    },
+ colors: [
+      '#e8f442'],
+    series: [{
+        data: data,
+        lineWidth: 0.5
+    }]
+
+
+});
+console.timeEnd('line');
+
+</script>
+{% endblock %}
+
+
+{% block area1 %}
+<div id="area1" style="width:440px; height: 200px; margin: 20px 0px 0px 30px;"></div>
+
+<script>
+
+Highcharts.chart('area1', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Billions'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: 'IoT Cihaz 1',
+        data: [502, 635, 809, 947, 1402, 3634, 5268]
+    }, {
+        name: 'IoT Cihaz2',
+        data: [106, 107, 111, 133, 221, 767, 1766]
+    }, {
+        name: 'IoT Cihaz 3',
+        data: [163, 203, 276, 408, 547, 729, 628]
+    }, {
+        name: 'IoT Cihaz 4',
+        data: [18, 31, 54, 156, 339, 818, 1201]
+    }, {
+        name: 'IoT Cihaz 5',
+        data: [2, 2, 2, 6, 13, 30, 46]
+    },{
+        name: 'IoT Cihaz 6',
+        data: [3, 5, 7, 6, 13, 45, 850]
+    }]
+});
+</script>
+{% endblock %}
+
+
+{% block area2 %}
+<div id="area2" style="width:440px; height: 200px; margin: 20px 0px 0px 90px;"></div>
+
+<script>
+
+Highcharts.chart('area2', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Billions'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: 'IoT Cihaz 1',
+        data: [502, 635, 809, 947, 1402, 3634, 5268]
+    }, {
+        name: 'IoT Cihaz2',
+        data: [106, 107, 111, 133, 221, 767, 1766]
+    }, {
+        name: 'IoT Cihaz 3',
+        data: [163, 203, 276, 408, 547, 729, 628]
+    }, {
+        name: 'IoT Cihaz 4',
+        data: [18, 31, 54, 156, 339, 818, 1201]
+    }, {
+        name: 'IoT Cihaz 5',
+        data: [2, 2, 2, 6, 13, 30, 46]
+    },{
+        name: 'IoT Cihaz 6',
+        data: [1800, 5, 7, 6, 13, 45, 850]
+    }]
+});
+</script>
+{% endblock %}
+
+
+
+
+{% block copyright %}
+<h5><font color="purple"> Enerdora A.Ş Enerji Yönetim Sistemi Version 1.1</font></h5>
+{% endblock %}
+
+
+</body>
+</html>

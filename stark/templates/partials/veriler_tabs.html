@@ -1,0 +1,145 @@
+
+
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}About Us {% endblock %}</title>
+
+
+
+
+</head>
+<body>
+
+ {% block veriler %}
+ <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'IoT 1')">IoT 1</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 2')">IoT 2</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 3')">IoT 3</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 4')">IoT 4</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 5')">IoT 5</button>
+  <button class="tablinks" onclick="openCity(event, 'IoT 6')">IoT 6</button>
+
+</div>
+
+<!-- Tab content -->
+<div id="IoT 1" class="tabcontent">
+
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <script>
+    var datatable = new DataTable(document.querySelector('#my-table'), {
+    data: [
+        ['Albert', 'Einstein'],
+        ['Linus', 'Torvalds'],
+        ['Ada', 'Lovelace']
+    ]
+});
+</script>
+
+    </tbody>
+</table>
+
+</div>
+
+ <div id="IoT 2" class="tabcontent">
+
+
+</div>
+
+ <div id="IoT 3" class="tabcontent">
+
+
+</div>
+
+ <div id="IoT 4" class="tabcontent">
+
+
+</div>
+
+
+<div id="IoT 5" class="tabcontent">
+
+
+</div>
+
+<div id="IoT 6" class="tabcontent">
+
+
+</div>
+
+
+ <script>
+     function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+ </script>
+<style>
+    /* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+ <!-- Tab links -->
+
+  {% endblock %}
+
+</body>
+</html>
